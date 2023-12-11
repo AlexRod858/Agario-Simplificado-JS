@@ -4,8 +4,8 @@ export default class Enemy {
     // --------------------------
     constructor(velX, velY) {
         this.position = {
-            x: 400,
-            y: 300
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height
         }
         this.velocidad = {
             x: velX,

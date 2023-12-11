@@ -4,19 +4,34 @@ canvas.height = 760;
 const ctx = canvas.getContext('2d');
 import Circulo from "./classes/ellipse.js";
 import Enemy from "./classes/enemies.js";
-// -----------------
+
 const circulo = new Circulo();
-const enemy = new Enemy(2,2);
+let enemigos = [];
+// -----------------------
+// -----------------------
+// E N E M I G O S
+for (let i = 0; i < 10; i++) {
+    const velocidadInicialX = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
+    const velocidadInicialY = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
+    const enemigo = new Enemy(velocidadInicialX, velocidadInicialY);
+    enemigos.push(enemigo);
+}
+// -----------------------
+// -----------------------
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    fase2();
+    juego();
 }
-draw();
-
-function fase2(){
+// -----------------------
+// -----------------------
+function juego() {
     circulo.dibujar();
-    enemy.dibujar();
-    enemy.movimiento();
-    enemy.rebote();
+    for (const enem of enemigos) {
+        enem.dibujar();
+        enem.movimiento();
+        enem.rebote();
+    }
 }
+
+draw();
