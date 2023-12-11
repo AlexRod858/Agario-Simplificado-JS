@@ -29,4 +29,14 @@ export default class Enemy {
     }
     // --------------------------
     // --------------------------
+    rebote() {
+        if (this.position.x > 1080 || this.position.x < 0) {
+            this.velocidad.x = -this.velocidad.x
+        }
+        if (this.position.y > 760 || this.position.y < 0) {
+            this.velocidad.y = -this.velocidad.y
+        }
+    }
+    // --------------------------
+    // --------------------------
 }
