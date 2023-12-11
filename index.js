@@ -9,6 +9,12 @@ const circulo = new Circulo();
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    circulo.dibujar();
+    fase2();
 }
 draw();
+
+function fase2(){
+
+    circulo.dibujar();
+
+}
