@@ -11,12 +11,13 @@ export default class Enemy {
             x: velX,
             y: velY
         }
+        this.radius = 20;
     }
     // --------------------------
     // --------------------------
     dibujar() {
         ctx.beginPath();
-        ctx.arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.closePath();

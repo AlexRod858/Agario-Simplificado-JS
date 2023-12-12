@@ -32,6 +32,24 @@ function juego() {
         enem.movimiento();
         enem.rebote();
     }
+    // -----------------------
+    colission();
 }
-
+// -----------------------
+// -----------------------
+function colission() {
+    for (const enem of enemigos) {
+        const distanciaX = circulo.position.x - enem.position.x;
+        const distanciaY = circulo.position.y - enem.position.y;
+        const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
+        console.log(distancia);
+        if (distancia < circulo.radius + enem.radius) {
+            // Se detectó una colisión, el círculo se "come" al enemigo
+            circulo.radius += 5;
+            console.log('COLISIONNNN');
+            // Puedes eliminar al enemigo si lo deseas
+            enemigos.splice(enemigos.indexOf(enem), 1);
+        }
+    }
+}
 draw();

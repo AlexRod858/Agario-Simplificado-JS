@@ -2,7 +2,6 @@ const ctx = canvas.getContext('2d');
 export default class Circulo {
     // --------------------------
     // --------------------------
-
     constructor() {
         this.position = {
             x: 200,
@@ -11,20 +10,20 @@ export default class Circulo {
         // Agregar el event listener para el teclado
         document.addEventListener('keydown', (event) => this.keyHandler(event));
         // document.addEventListener('keyup', (event) => this.keyHandler(event));
+        this.radius = 40;
     }
     // --------------------------
     // --------------------------
 
     dibujar() {
         ctx.beginPath();
-        ctx.arc(this.position.x, this.position.y, 40, 0, 2 * Math.PI);
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.closePath();
     }
     // --------------------------
     // --------------------------
-
     keyHandler(event) {
         switch (event.key) {
             case 'ArrowUp':
@@ -47,5 +46,4 @@ export default class Circulo {
     }
     // --------------------------
     // --------------------------
-
 }
