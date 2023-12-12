@@ -42,8 +42,7 @@ function colission() {
         const distanciaX = circulo.position.x - enem.position.x;
         const distanciaY = circulo.position.y - enem.position.y;
         const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
-        console.log(distancia);
-        if (distancia < circulo.radius + enem.radius) {
+        if (distancia < circulo.radius - enem.radius) {
             // Se detectó una colisión, el círculo se "come" al enemigo
             circulo.radius += 5;
             console.log('COLISIONNNN');

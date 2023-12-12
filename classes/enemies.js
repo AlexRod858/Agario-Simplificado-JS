@@ -11,7 +11,7 @@ export default class Enemy {
             x: velX,
             y: velY
         }
-        this.radius = 20;
+        this.radius = Math.random()*50 + 20;
     }
     // --------------------------
     // --------------------------
