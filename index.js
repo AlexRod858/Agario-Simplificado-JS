@@ -21,12 +21,13 @@ for (let i = 0; i < 10; i++) {
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    juego();
+    fase1();
 }
 // -----------------------
 // -----------------------
-function juego() {
+function fase1() {
     circulo.dibujar();
+    // -----------------------
     for (const enem of enemigos) {
         enem.dibujar();
         enem.movimiento();
@@ -46,9 +47,11 @@ function colission() {
             // Se detectó una colisión, el círculo se "come" al enemigo
             circulo.radius += 5;
             console.log('COLISIONNNN');
-            // Puedes eliminar al enemigo si lo deseas
+            // Eliminar al enemigo
             enemigos.splice(enemigos.indexOf(enem), 1);
         }
     }
 }
+// -----------------------
+// -----------------------
 draw();
