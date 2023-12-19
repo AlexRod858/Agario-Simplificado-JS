@@ -7,6 +7,7 @@ import Enemy from "./classes/enemies.js";
 
 const circulo = new Circulo();
 let enemigos = [];
+let fase = 2;
 // -----------------------
 // -----------------------
 // E N E M I G O S
@@ -21,11 +22,26 @@ for (let i = 0; i < 10; i++) {
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    fase1();
+    switch (fase) {
+        case 1:
+
+            break;
+        case 2:
+            fase2();
+            // if (terminado == true) {
+            //     fase = 3;
+            // }
+            break;
+        case 3:
+
+            break;
+
+    }
 }
 // -----------------------
 // -----------------------
-function fase1() {
+function fase2() {
+    canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
     circulo.dibujar();
     // -----------------------
     for (const enem of enemigos) {
