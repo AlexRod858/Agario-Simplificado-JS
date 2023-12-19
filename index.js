@@ -4,11 +4,14 @@ canvas.height = 760;
 const ctx = canvas.getContext('2d');
 import Circulo from "./classes/ellipse.js";
 import Enemy from "./classes/enemies.js";
+import Fase1 from "./fase1.js";
 
+const fase1 = new Fase1;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 2;
+let fase = 1;
 let musicaFase2Reproducida = false;
+let juegoTerminado = false;
 
 // -----------------------
 // -----------------------
@@ -26,11 +29,12 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch (fase) {
         case 1:
-
+            fase1.dibujarBotonJugar(ctx);
+            fase1.dibujarBotonSalir(ctx);
             break;
         case 2:
             fase2();
-            // if (terminado == true) {
+            // if (juegoTerminado) {
             //     fase = 3;
             // }
             break;
