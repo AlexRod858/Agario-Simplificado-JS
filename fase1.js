@@ -1,8 +1,21 @@
 export default class Fase1 {
     // --------------------------
+    musicaFase1Reproducida = false;
     // --------------------------
     constructor() {
-        this.fondo = "url('assets/imgs/fondo-fase1.jpg')";
+        canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
+        canvas.style.backgroundRepeat = "no-repeat";
+        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+        if (!this.musicaFase1Reproducida) {
+            this.playFase1Sound();
+            // Marca la música como reproducida para evitar repeticiones
+            this.musicaFase1Reproducida = true;
+        }
+    }
+
+    playFase1Sound() {
+        let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
+        fase1Sound.play();
     }
 
     dibujarBotonJugar(pepe) {

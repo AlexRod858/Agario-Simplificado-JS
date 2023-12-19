@@ -82,11 +82,11 @@ function colission() {
     }
 }
 function playFase2Sound() {
-    var fase2Sound = new Audio('./assets/sounds/fase2.mp3');
+    let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
     fase2Sound.play();
 }
 function playColisionSound() {
-    var colisionSound = new Audio('./assets/sounds/pop.mp3');
+    let colisionSound = new Audio('./assets/sounds/pop.mp3');
     colisionSound.play();
 }
 // -----------------------
