@@ -8,6 +8,8 @@ import Enemy from "./classes/enemies.js";
 const circulo = new Circulo();
 let enemigos = [];
 let fase = 2;
+let musicaFase2Reproducida = false;
+
 // -----------------------
 // -----------------------
 // E N E M I G O S
@@ -42,6 +44,11 @@ function draw() {
 // -----------------------
 function fase2() {
     canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
+    if (!musicaFase2Reproducida) {
+        playFase2Sound();
+        // Marca la música como reproducida para evitar repeticiones
+        musicaFase2Reproducida = true;
+    }
     circulo.dibujar();
     // -----------------------
     for (const enem of enemigos) {
@@ -55,6 +62,7 @@ function fase2() {
 // -----------------------
 // -----------------------
 function colission() {
+
     for (const enem of enemigos) {
         const distanciaX = circulo.position.x - enem.position.x;
         const distanciaY = circulo.position.y - enem.position.y;
@@ -62,11 +70,20 @@ function colission() {
         if (distancia < circulo.radius - enem.radius) {
             // Se detectó una colisión, el círculo se "come" al enemigo
             circulo.radius += 5;
+            playColisionSound();
             console.log('COLISIONNNN');
             // Eliminar al enemigo
             enemigos.splice(enemigos.indexOf(enem), 1);
         }
     }
+}
+function playFase2Sound() {
+    var fase2Sound = new Audio('./assets/sounds/fase2.mp3');
+    fase2Sound.play();
+}
+function playColisionSound() {
+    var colisionSound = new Audio('./assets/sounds/pop.mp3');
+    colisionSound.play();
 }
 // -----------------------
 // -----------------------
