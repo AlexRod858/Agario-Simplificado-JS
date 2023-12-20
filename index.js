@@ -11,10 +11,14 @@ const circulo = new Circulo();
 let enemigos = [];
 let fase = 1;
 let juegoTerminado = false;
+let tiempo = 0;
+let intervaloTiempo;
 
 // -----------------------
 // -----------------------
 // E N E M I G O S
+// -----------------------
+// -----------------------
 for (let i = 0; i < 10; i++) {
     const velocidadInicialX = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
     const velocidadInicialY = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
@@ -25,6 +29,10 @@ for (let i = 0; i < 10; i++) {
 let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
 let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
 let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
+// -----------------------
+// -----------------------
+// D R A W
+// -----------------------
 // -----------------------
 function draw() {
     requestAnimationFrame(draw);
@@ -38,10 +46,11 @@ function draw() {
             console.log("Ejecutando músicaJuego")
             // fase1Sound.play();
             fase1.dibujarBotonJugar(ctx);
+            // Delay boton jugar
             if (fase1.cambioFase) {
                 setTimeout(() => {
                     fase = 2;
-                }, 1000); // 500 milisegundos (medio segundo)
+                }, 800); // 500 milisegundos (medio segundo)
             }
             break;
         case 2:
@@ -51,21 +60,22 @@ function draw() {
             fase3Sound.currentTime = 0;
             // fase2Sound.play();
             fase2();
-            // if (juegoTerminado) {
-            //     fase = 3;
-            // }
+
             break;
         case 3:
             fase1Sound.pause();
             fase1Sound.currentTime = 0;
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
-            fase3Sound.play();
+            // fase3Sound.play();
             break;
 
     }
 
 }
+// -----------------------
+// -----------------------
+// F A S E  2
 // -----------------------
 // -----------------------
 function fase2() {
@@ -79,7 +89,22 @@ function fase2() {
     }
     // -----------------------
     colission();
+    dibujarTimer();
 }
+// -----------------------
+// -----------------------
+
+function dibujarTimer(){
+    // const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '24px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillText(`Tiempo: ${tiempo}s`, canvas.width - 10, 30);
+}
+const intervalId = setInterval(() => {
+    tiempo++;
+    dibujarTimer();
+}, 1000);
 // -----------------------
 // -----------------------
 function colission() {
