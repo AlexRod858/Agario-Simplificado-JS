@@ -9,7 +9,7 @@ import Fase1 from "./fase1.js";
 const fase1 = new Fase1;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 2;
+let fase = 1;
 let juegoTerminado = false;
 
 // -----------------------
@@ -22,12 +22,21 @@ for (let i = 0; i < 10; i++) {
     enemigos.push(enemigo);
 }
 // -----------------------
+let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
+let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
+let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
 // -----------------------
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch (fase) {
         case 1:
+            fase2Sound.pause();
+            fase2Sound.currentTime = 0;
+            fase3Sound.pause();
+            fase3Sound.currentTime = 0;
+            console.log("Ejecutando músicaJuego")
+            // fase1Sound.play();
             fase1.dibujarBotonJugar(ctx);
             if (fase1.cambioFase) {
                 setTimeout(() => {
@@ -36,13 +45,22 @@ function draw() {
             }
             break;
         case 2:
+            fase1Sound.pause();
+            fase1Sound.currentTime = 0;
+            fase3Sound.pause();
+            fase3Sound.currentTime = 0;
+            // fase2Sound.play();
             fase2();
             // if (juegoTerminado) {
             //     fase = 3;
             // }
             break;
         case 3:
-
+            fase1Sound.pause();
+            fase1Sound.currentTime = 0;
+            fase2Sound.pause();
+            fase2Sound.currentTime = 0;
+            fase3Sound.play();
             break;
 
     }
@@ -80,42 +98,12 @@ function colission() {
         }
     }
 }
-
+// -----------------------
+// -----------------------
 function playColisionSound() {
     let colisionSound = new Audio('./assets/sounds/pop.mp3');
     colisionSound.play();
 }
-
-function musicaJuego() {
-    let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
-    let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
-    let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
-
-    if (fase == 1) {
-        // Detener otras pistas de sonido si están reproduciéndose
-        fase2Sound.pause();
-        fase2Sound.currentTime = 0;
-        fase3Sound.pause();
-        fase3Sound.currentTime = 0;
-        console.log("Ejecutando músicaJuego")
-        fase1Sound.play();
-    } else if (fase == 2) {
-        // Detener otras pistas de sonido si están reproduciéndose
-        fase1Sound.pause();
-        fase1Sound.currentTime = 0;
-        fase3Sound.pause();
-        fase3Sound.currentTime = 0;
-        fase2Sound.play();
-    } else {
-        // Detener otras pistas de sonido si están reproduciéndose
-        fase1Sound.pause();
-        fase1Sound.currentTime = 0;
-        fase2Sound.pause();
-        fase2Sound.currentTime = 0;
-        fase3Sound.play();
-    }
-}
-
 // -----------------------
 // -----------------------
 // musicaJuego();
