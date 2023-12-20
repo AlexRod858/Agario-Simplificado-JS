@@ -1,34 +1,49 @@
 export default class Fase1 {
     // --------------------------
     musicaFase1Reproducida = false;
+    botonJugarPresionado = false;
     // --------------------------
     constructor() {
         canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
         canvas.style.backgroundRepeat = "no-repeat";
         canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+
+        // Agregado: Manejadores de eventos
+        canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
+        canvas.addEventListener('mouseup', this.manejarMouseUp.bind(this));
+        this.cambioFase = false;
+        this.salirJuego = false;
     }
 
-    dibujarBotonJugar(pepe) {
-        // Dibujar el botón "Jugar"
-        pepe.fillStyle = 'green';
-        pepe.fillRect(1080/2 - 150, 280, 300, 80);
-    }
-
-    dibujarBotonSalir(manuel) {
+    dibujarBotonJugar(manuel) {
         // Dibujar el botón "Salir"
-        manuel.fillStyle = 'pink';
-        manuel.fillRect(1080/2 - 150, 400, 300, 80);
+        manuel.fillStyle = this.botonJugarPresionado ? '#CCCC22' : '#F8DE22';
+        manuel.fillRect(1080 / 2 - 150, 400, 300, 80);
+        manuel.fillStyle = '#001122';
+        manuel.textAlign = 'center';
+        manuel.font = 'bold 48px arial';
+        manuel.fillText('JUGAR', 1080 / 2, 460, 200);
     }
 
-    clickBotonJugar() {
-        // Lógica para cuando se hace clic en el botón "Jugar"
-        console.log('Hiciste clic en Jugar desde la fase 1');
-        // Puedes cambiar de fase u realizar otras acciones aquí
+    manejarMouseDown(event) {
+        const x = event.clientX - canvas.getBoundingClientRect().left;
+        const y = event.clientY - canvas.getBoundingClientRect().top;
+
+        if (this.cambioFase === false) {
+            let clickSound = new Audio('./assets/sounds/click.mp3');
+            clickSound.play();
+        }
+
+        // Verificar si el clic está dentro del área del botón "Salir"
+        if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
+            this.botonJugarPresionado = true;
+            this.dibujarBotonJugar(canvas.getContext('2d'));
+            this.cambioFase = true;
+        }
     }
 
-    clickBotonSalir() {
-        // Lógica para cuando se hace clic en el botón "Salir"
-        console.log('Hiciste clic en Salir desde la fase 1');
-        // Puedes salir del juego o realizar otras acciones aquí
+    manejarMouseUp() {
+        this.botonJugarPresionado = false;
+        this.dibujarBotonJugar(canvas.getContext('2d'));
     }
 }

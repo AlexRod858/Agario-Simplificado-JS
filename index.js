@@ -9,8 +9,7 @@ import Fase1 from "./fase1.js";
 const fase1 = new Fase1;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 1;
-// let musicaFase2Reproducida = false;
+let fase = 2;
 let juegoTerminado = false;
 
 // -----------------------
@@ -30,7 +29,11 @@ function draw() {
     switch (fase) {
         case 1:
             fase1.dibujarBotonJugar(ctx);
-            fase1.dibujarBotonSalir(ctx);
+            if (fase1.cambioFase) {
+                setTimeout(() => {
+                    fase = 2;
+                }, 1000); // 500 milisegundos (medio segundo)
+            }
             break;
         case 2:
             fase2();
@@ -43,6 +46,7 @@ function draw() {
             break;
 
     }
+
 }
 // -----------------------
 // -----------------------
@@ -76,10 +80,7 @@ function colission() {
         }
     }
 }
-// function playFase2Sound() {
-//     let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
-//     fase2Sound.play();
-// }
+
 function playColisionSound() {
     let colisionSound = new Audio('./assets/sounds/pop.mp3');
     colisionSound.play();
@@ -96,8 +97,7 @@ function musicaJuego() {
         fase2Sound.currentTime = 0;
         fase3Sound.pause();
         fase3Sound.currentTime = 0;
-
-        // Reproducir la pista de sonido de la fase 1
+        console.log("Ejecutando músicaJuego")
         fase1Sound.play();
     } else if (fase == 2) {
         // Detener otras pistas de sonido si están reproduciéndose
@@ -105,8 +105,6 @@ function musicaJuego() {
         fase1Sound.currentTime = 0;
         fase3Sound.pause();
         fase3Sound.currentTime = 0;
-
-        // Reproducir la pista de sonido de la fase 2
         fase2Sound.play();
     } else {
         // Detener otras pistas de sonido si están reproduciéndose
@@ -114,13 +112,11 @@ function musicaJuego() {
         fase1Sound.currentTime = 0;
         fase2Sound.pause();
         fase2Sound.currentTime = 0;
-
-        // Reproducir la pista de sonido de la fase 3
         fase3Sound.play();
     }
 }
 
 // -----------------------
 // -----------------------
-musicaJuego();
+// musicaJuego();
 draw();
