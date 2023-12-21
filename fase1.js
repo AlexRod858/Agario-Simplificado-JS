@@ -4,6 +4,9 @@ export default class Fase1 {
     botonJugarPresionado = false;
     // --------------------------
     constructor() {
+        canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
+        canvas.style.backgroundRepeat = "no-repeat";
+        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
 
         // Agregado: Manejadores de eventos
         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
@@ -26,16 +29,16 @@ export default class Fase1 {
         const x = event.clientX - canvas.getBoundingClientRect().left;
         const y = event.clientY - canvas.getBoundingClientRect().top;
 
-        if (this.cambioFase === false) {
-            let clickSound = new Audio('./assets/sounds/click.mp3');
-            clickSound.play();
-        }
-
         // Verificar si el clic está dentro del área del botón "Salir"
         if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
             this.botonJugarPresionado = true;
             this.dibujarBotonJugar(canvas.getContext('2d'));
             this.cambioFase = true;
+            let clickSound = new Audio('./assets/sounds/boton.mp3');
+            clickSound.play();
+        }else{
+            let clickSound = new Audio('./assets/sounds/click.mp3');
+            clickSound.play();
         }
     }
 

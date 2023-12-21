@@ -11,7 +11,7 @@ const fase1 = new Fase1;
 const fase3 = new Fase3;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 3;
+let fase = 1;
 let tiempo = 0;
 let tiempoFinal;
 let intervaloTiempo;
@@ -30,7 +30,7 @@ for (let i = 0; i < 10; i++) {
 // -----------------------
 let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
 let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
-// let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
+let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
 // -----------------------
 // -----------------------
 // D R A W
@@ -47,17 +47,17 @@ function draw() {
 
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
-            // fase3Sound.pause();
-            // fase3Sound.currentTime = 0;
+            fase3Sound.pause();
+            fase3Sound.currentTime = 0;
             console.log("Ejecutando músicaJuego")
-            // fase1Sound.play();
+            fase1Sound.play();
             fase1.dibujarBotonJugar(ctx);
             tiempo = 0;
             // Delay boton jugar
             if (fase1.cambioFase) {
                 setTimeout(() => {
                     fase = 2;
-                }, 800); // 500 milisegundos (medio segundo)
+                }, 1400); // 500 milisegundos (medio segundo)
             }
             break;
         case 2:
@@ -67,9 +67,9 @@ function draw() {
 
             fase1Sound.pause();
             fase1Sound.currentTime = 0;
-            // fase3Sound.pause();
-            // fase3Sound.currentTime = 0;
-            // fase2Sound.play();
+            fase3Sound.pause();
+            fase3Sound.currentTime = 0;
+            fase2Sound.play();
             fase2();
             break;
         case 3:
@@ -81,7 +81,7 @@ function draw() {
             fase1Sound.currentTime = 0;
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
-            // fase3Sound.play();
+            fase3Sound.play();
             // fase3();
             fase3.mostrarTiempo(tiempoFinal);
             break;
