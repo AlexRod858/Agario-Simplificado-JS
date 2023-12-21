@@ -10,13 +10,12 @@ export default class Fase3 {
         // Agregado: Manejadores de eventos
         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
         canvas.addEventListener('mouseup', this.manejarMouseUp.bind(this));
-        this.cambioFase = false;
-        this.salirJuego = false;
+        this.inicio = false;
     }
 
     mostrarTiempo(tiempo) {
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = '#F0EBCC';
         ctx.font = '76px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(`Tiempo: ${tiempo}s`, canvas.width / 2, (canvas.height / 2) - 80);
@@ -24,9 +23,9 @@ export default class Fase3 {
 
     dibujarBotonInicio(manuel) {
         // Dibujar el botón "Salir"
-        manuel.fillStyle = this.botonJugarPresionado ? '#CCCC22' : '#F8DE22';
+        manuel.fillStyle = this.botonJugarPresionado ? '#F0EBCC' : '#3EDBF0';
         manuel.fillRect(1080 / 2 - 150, 400, 300, 80);
-        manuel.fillStyle = '#001122';
+        manuel.fillStyle = this.botonJugarPresionado ? '#3EDBF0' : '#F0EBCC';
         manuel.textAlign = 'center';
         manuel.font = 'bold 48px arial';
         manuel.fillText('INICIO', 1080 / 2, 460, 200);
@@ -35,11 +34,11 @@ export default class Fase3 {
         const x = event.clientX - canvas.getBoundingClientRect().left;
         const y = event.clientY - canvas.getBoundingClientRect().top;
 
-        // Verificar si el clic está dentro del área del botón "Salir"
+        // Verificar si el clic está dentro del área del botón "Inicio"
         if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
             this.botonJugarPresionado = true;
-            this.dibujarBotonJugar(canvas.getContext('2d'));
-            this.cambioFase = true;
+            this.dibujarBotonInicio(canvas.getContext('2d'));
+            this.inicio = true;
             let clickSound = new Audio('./assets/sounds/boton.mp3');
             clickSound.play();
         } else {
@@ -50,6 +49,6 @@ export default class Fase3 {
 
     manejarMouseUp() {
         this.botonJugarPresionado = false;
-        this.dibujarBotonJugar(canvas.getContext('2d'));
+        this.dibujarBotonInicio(canvas.getContext('2d'));
     }
 }

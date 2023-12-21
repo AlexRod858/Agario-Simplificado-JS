@@ -11,7 +11,7 @@ const fase1 = new Fase1;
 const fase3 = new Fase3;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 3;
+let fase = 1;
 let tiempo = 0;
 let tiempoFinal;
 let intervaloTiempo;
@@ -57,7 +57,7 @@ function draw() {
             if (fase1.cambioFase) {
                 setTimeout(() => {
                     fase = 2;
-                }, 1400); // 500 milisegundos (medio segundo)
+                }, 1400);
             }
             break;
         case 2:
@@ -85,6 +85,11 @@ function draw() {
             // fase3();
             fase3.mostrarTiempo(tiempoFinal);
             fase3.dibujarBotonInicio(ctx);
+            if (fase3.inicio) {
+                setTimeout(() => {
+                    fase = 1;
+                }, 1400);
+            }
             break;
     }
 
