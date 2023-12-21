@@ -11,7 +11,7 @@ const fase1 = new Fase1;
 const fase3 = new Fase3;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 1;
+let fase = 3;
 let tiempo = 0;
 let tiempoFinal;
 let intervaloTiempo;
@@ -84,6 +84,7 @@ function draw() {
             fase3Sound.play();
             // fase3();
             fase3.mostrarTiempo(tiempoFinal);
+            fase3.dibujarBotonInicio(ctx);
             break;
     }
 
