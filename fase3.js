@@ -8,5 +8,11 @@ export default class Fase3 {
 
     }
 
-
+    mostrarTiempo(tiempo) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '76px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Tiempo: ${tiempo}s`, canvas.width /2 , (canvas.height /2)-80);
+    }
 }

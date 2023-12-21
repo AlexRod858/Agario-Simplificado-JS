@@ -11,9 +11,9 @@ const fase1 = new Fase1;
 const fase3 = new Fase3;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 1;
-let juegoTerminado = false;
+let fase = 3;
 let tiempo = 0;
+let tiempoFinal;
 let intervaloTiempo;
 
 // -----------------------
@@ -82,7 +82,8 @@ function draw() {
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
             // fase3Sound.play();
-            fase3();
+            // fase3();
+            fase3.mostrarTiempo(tiempoFinal);
             break;
     }
 
@@ -103,6 +104,7 @@ function fase2() {
     // -----------------------
     colission();
     dibujarTimer();
+
 }
 // -----------------------
 // -----------------------
@@ -134,6 +136,7 @@ function colission() {
             // Eliminar al enemigo
             enemigos.splice(enemigos.indexOf(enem), 1);
             if (enemigos < 1) {
+                tiempoFinal = tiempo;
                 console.log("FIN");
                 fase = 3;
             }
