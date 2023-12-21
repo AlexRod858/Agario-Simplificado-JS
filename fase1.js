@@ -4,9 +4,6 @@ export default class Fase1 {
     botonJugarPresionado = false;
     // --------------------------
     constructor() {
-        canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
-        canvas.style.backgroundRepeat = "no-repeat";
-        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
 
         // Agregado: Manejadores de eventos
         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
