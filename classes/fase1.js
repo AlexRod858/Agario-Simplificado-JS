@@ -12,7 +12,6 @@ export default class Fase1 {
         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
         canvas.addEventListener('mouseup', this.manejarMouseUp.bind(this));
         this.cambioFase = false;
-        this.salirJuego = false;
     }
 
     dibujarBotonJugar(manuel) {
@@ -29,13 +28,12 @@ export default class Fase1 {
         const x = event.clientX - canvas.getBoundingClientRect().left;
         const y = event.clientY - canvas.getBoundingClientRect().top;
 
-        // Verificar si el clic está dentro del área del botón "Salir"
+        // Verificar si el clic está dentro del área del botón "Jugar"
         if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
             this.botonJugarPresionado = true;
-            this.dibujarBotonJugar(canvas.getContext('2d'));
-            this.cambioFase = true;
             let clickSound = new Audio('./assets/sounds/boton.mp3');
             clickSound.play();
+            this.cambioFase = true;
         }else{
             let clickSound = new Audio('./assets/sounds/click.mp3');
             clickSound.play();

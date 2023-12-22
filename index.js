@@ -4,8 +4,8 @@ canvas.height = 760;
 const ctx = canvas.getContext('2d');
 import Circulo from "./classes/ellipse.js";
 import Enemy from "./classes/enemies.js";
-import Fase1 from "./fase1.js";
-import Fase3 from "./fase3.js";
+import Fase1 from "./classes/fase1.js";
+import Fase3 from "./classes/fase3.js";
 
 const fase1 = new Fase1;
 const fase3 = new Fase3;
@@ -41,22 +41,21 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch (fase) {
         case 1:
-            canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
-            canvas.style.backgroundPosition = 'center center';
-            canvas.style.backgroundSize = 'cover';
-
+            // -----------------------
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
             fase3Sound.pause();
             fase3Sound.currentTime = 0;
-            console.log("Ejecutando músicaJuego")
             fase1Sound.play();
+            // -----------------------
             fase1.dibujarBotonJugar(ctx);
             tiempo = 0;
             // Delay boton jugar
             if (fase1.cambioFase) {
                 setTimeout(() => {
                     fase = 2;
+                    fase1.cambioFase = false;
+                    // fase1.botonJugarPresionado = false;
                 }, 1400);
             }
             break;
@@ -64,30 +63,30 @@ function draw() {
             canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
             canvas.style.backgroundPosition = 'center center';
             canvas.style.backgroundSize = 'cover';
-
+            // -----------------------
             fase1Sound.pause();
             fase1Sound.currentTime = 0;
             fase3Sound.pause();
             fase3Sound.currentTime = 0;
             fase2Sound.play();
+            // -----------------------
             fase2();
             break;
         case 3:
-            canvas.style.backgroundImage = "url('assets/imgs/fondofase3.jpg')";
-            canvas.style.backgroundPosition = 'center center';
-            canvas.style.backgroundSize = 'cover';
-
+            // -----------------------
             fase1Sound.pause();
             fase1Sound.currentTime = 0;
             fase2Sound.pause();
             fase2Sound.currentTime = 0;
             fase3Sound.play();
-            // fase3();
+            // -----------------------
             fase3.mostrarTiempo(tiempoFinal);
             fase3.dibujarBotonInicio(ctx);
             if (fase3.inicio) {
                 setTimeout(() => {
                     fase = 1;
+                    fase3.inicio = false;
+                    fase3.botonJugarPresionado = false;
                 }, 1400);
             }
             break;
@@ -115,7 +114,7 @@ function fase2() {
 // -----------------------
 // -----------------------
 
-function dibujarTimer(){
+function dibujarTimer() {
     // const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '24px Arial';

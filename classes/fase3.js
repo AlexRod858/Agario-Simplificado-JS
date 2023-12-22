@@ -2,15 +2,11 @@ export default class Fase3 {
     // --------------------------
     // --------------------------
     constructor() {
-        // canvas.style.backgroundImage = "url('assets/imgs/fondofase3.jpg')";
-        canvas.style.backgroundRepeat = "no-repeat";
-        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
-
-
         // Agregado: Manejadores de eventos
         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
         canvas.addEventListener('mouseup', this.manejarMouseUp.bind(this));
         this.inicio = false;
+        this.botonJugarPresionado = false;
     }
 
     mostrarTiempo(tiempo) {
@@ -37,7 +33,6 @@ export default class Fase3 {
         // Verificar si el clic está dentro del área del botón "Inicio"
         if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
             this.botonJugarPresionado = true;
-            this.dibujarBotonInicio(canvas.getContext('2d'));
             this.inicio = true;
             let clickSound = new Audio('./assets/sounds/boton.mp3');
             clickSound.play();
