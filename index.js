@@ -4,101 +4,85 @@ canvas.height = 760;
 const ctx = canvas.getContext('2d');
 import Circulo from "./classes/ellipse.js";
 import Enemy from "./classes/enemies.js";
-import Fase1 from "./classes/fase1.js";
-import Fase3 from "./classes/fase3.js";
+// import Fase1 from "./classes/fase1.js";
+// import Fase3 from "./classes/fase3.js";
 
-const fase1 = new Fase1;
-const fase3 = new Fase3;
+// const fase1 = new Fase1;
+// const fase3 = new Fase3;
 const circulo = new Circulo();
 let enemigos = [];
-let fase = 1;
+let fase = 3;
 let tiempo = 0;
 let tiempoFinal;
 let intervaloTiempo;
 
-// -----------------------
-// -----------------------
-// E N E M I G O S
-// -----------------------
-// -----------------------
-for (let i = 0; i < 10; i++) {
-    const velocidadInicialX = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
-    const velocidadInicialY = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
-    const enemigo = new Enemy(velocidadInicialX, velocidadInicialY);
-    enemigos.push(enemigo);
-}
 // -----------------------
 let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
 let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
 let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
 // -----------------------
 // -----------------------
-// D R A W
+// F A S E  1
 // -----------------------
 // -----------------------
-function draw() {
-    requestAnimationFrame(draw);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    switch (fase) {
-        case 1:
-            // -----------------------
-            fase2Sound.pause();
-            fase2Sound.currentTime = 0;
-            fase3Sound.pause();
-            fase3Sound.currentTime = 0;
-            fase1Sound.play();
-            // -----------------------
-            fase1.dibujarBotonJugar(ctx);
-            tiempo = 0;
-            // Delay boton jugar
-            if (fase1.cambioFase) {
-                setTimeout(() => {
-                    fase = 2;
-                    fase1.cambioFase = false;
-                    // fase1.botonJugarPresionado = false;
-                }, 1400);
-            }
-            break;
-        case 2:
-            canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
-            canvas.style.backgroundPosition = 'center center';
-            canvas.style.backgroundSize = 'cover';
-            // -----------------------
-            fase1Sound.pause();
-            fase1Sound.currentTime = 0;
-            fase3Sound.pause();
-            fase3Sound.currentTime = 0;
-            fase2Sound.play();
-            // -----------------------
-            fase2();
-            break;
-        case 3:
-            // -----------------------
-            fase1Sound.pause();
-            fase1Sound.currentTime = 0;
-            fase2Sound.pause();
-            fase2Sound.currentTime = 0;
-            fase3Sound.play();
-            // -----------------------
-            fase3.mostrarTiempo(tiempoFinal);
-            fase3.dibujarBotonInicio(ctx);
-            if (fase3.inicio) {
-                setTimeout(() => {
-                    fase = 1;
-                    fase3.inicio = false;
-                    fase3.botonJugarPresionado = false;
-                }, 1400);
-            }
-            break;
-    }
-
+function fase1() {
+    // -----------------------
+    // requestAnimationFrame(fase1);
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
+    canvas.style.backgroundRepeat = "no-repeat";
+    canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+    // -----------------------
+    
+    dibujarBotonJugar(ctx);
 }
+// -----------------------
+// -----------------------
+function dibujarBotonJugar(ctx) {
+    // Dibujar el botón "Jugar"
+    ctx.fillStyle = '#CCCC22';
+    ctx.fillRect(1080 / 2 - 150, 400, 300, 80);
+    ctx.fillStyle = '#001122';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 48px arial';
+    ctx.fillText('JUGAR', 1080 / 2, 460, 200);
+}
+// -----------------------
+// -----------------------
+function manejarMouseDown(event) {
+    const x = event.clientX - canvas.getBoundingClientRect().left;
+    const y = event.clientY - canvas.getBoundingClientRect().top;
+
+    // Verificar si el clic está dentro del área del botón "Jugar"
+    if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
+        console.log('Dentro');
+        let clickDentro = new Audio('../assets/sounds/clickDentro.mp3')
+        clickDentro.play();
+        this.botonJugarPresionado = true;
+        fase++;
+        canvas.removeEventListener('mousedown', manejarMouseDown);
+        draw();
+    } else {
+        console.log('Fuera');
+        let clickFuera = new Audio('../assets/sounds/clickFuera.mp3')
+        clickFuera.play();
+    }
+}
+
+// Agregar el event listener para 'mousedown'
+canvas.addEventListener('mousedown', manejarMouseDown);
+
 // -----------------------
 // -----------------------
 // F A S E  2
 // -----------------------
 // -----------------------
 function fase2() {
+    requestAnimationFrame(fase2);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
+    canvas.style.backgroundRepeat = "no-repeat";
+    canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
     circulo.dibujar();
     // -----------------------
     for (const enem of enemigos) {
@@ -111,9 +95,6 @@ function fase2() {
     dibujarTimer();
 
 }
-// -----------------------
-// -----------------------
-
 function dibujarTimer() {
     // const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#FFFFFF';
@@ -123,8 +104,20 @@ function dibujarTimer() {
 }
 const intervalId = setInterval(() => {
     tiempo++;
-    dibujarTimer();
+    // dibujarTimer();
 }, 1000);
+// ----------------------------------------
+// ---------- E N E M I G O S -------------
+for (let i = 0; i < 10; i++) {
+    const velocidadInicialX = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
+    const velocidadInicialY = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
+    const enemigo = new Enemy(velocidadInicialX, velocidadInicialY);
+    enemigos.push(enemigo);
+}
+// -----------------------
+// -----------------------
+
+
 // -----------------------
 // -----------------------
 function colission() {
@@ -143,7 +136,8 @@ function colission() {
             if (enemigos < 1) {
                 tiempoFinal = tiempo;
                 console.log("FIN");
-                fase = 3;
+                fase ++;
+                draw();
             }
         }
     }
@@ -156,5 +150,84 @@ function playColisionSound() {
 }
 // -----------------------
 // -----------------------
-// musicaJuego();
+// F A S E  3
+// -----------------------
+// -----------------------
+let botonJugarPresionado = false;
+function faseTres() {
+    // -----------------------
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // -----------------------
+    canvas.style.backgroundImage = "url('assets/imgs/fondofase3.jpg')";
+    canvas.style.backgroundRepeat = "no-repeat";
+    canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+    // -----------------------
+    // -----------------------
+    fase2Sound.pause();
+    fase2Sound.currentTime = 0;
+    fase1Sound.pause();
+    fase1Sound.currentTime = 0;
+    // fase3Sound.play();
+    // -----------------------
+    // -----------------------
+    // let tiempo = 0;
+    // canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
+    // canvas.addEventListener('mouseup', this.manejarMouseUp.bind(this));
+    dibujarBotonInicio(ctx)
+    // mostrarTiempo(tiempo)
+}
+// -----------------------
+// -----------------------
+function dibujarBotonInicio(ctx) {
+    // Dibujar el botón "Salir"
+    ctx.fillStyle = botonJugarPresionado ? '#F0EBCC' : '#3EDBF0';
+    ctx.fillRect(1080 / 2 - 150, 400, 300, 80);
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 48px arial';
+    ctx.fillText('INICIO', 1080 / 2, 460, 200);
+}
+// -----------------------
+// -----------------------
+// function mostrarTiempo(tiempo) {
+//     const ctx = canvas.getContext('2d');
+//     ctx.fillStyle = '#F0EBCC';
+//     ctx.font = '76px Arial';
+//     ctx.textAlign = 'center';
+//     ctx.fillText(`Tiempo: ${tiempo}s`, canvas.width / 2, (canvas.height / 2) - 80);
+// }
+// -----------------------
+// -----------------------
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------
+// -----------------------
+// F U N C I O N  P R I N C I P A L
+// -----------------------
+// -----------------------
+function draw() {
+    requestAnimationFrame(fase1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    switch (fase) {
+        case 1:
+            fase1();
+            break;
+        case 2:
+            fase2();
+            tiempo = 0;
+            dibujarTimer();
+            break;
+        case 3:
+            faseTres();
+            break;
+    }
+}
 draw();
