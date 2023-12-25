@@ -5,7 +5,7 @@ export default class Boton {
 
     }
 
-    dibujarBotonJugar(ctx, width, height, texto) {
+    dibujarBoton(ctx, width, height, texto) {
         // Dibujar el botón "Jugar"
         ctx.fillStyle = '#3EDBF0';
         ctx.fillRect(1080 / 2 - 150, 400, width, height);

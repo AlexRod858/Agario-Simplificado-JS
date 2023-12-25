@@ -1,6 +1,6 @@
-import Fase1 from "./classes/fase1";
-import Fase2 from "./classes/fase2";
-import Fase3 from "./classes/fase3";
+import Fase1 from "./classes/fase1.js";
+import Fase2 from "./classes/fase2.js";
+import Fase3 from "./classes/fase3.js";
 // -----------------------
 const canvas = document.getElementById('canvas');
 canvas.width = 1080;
@@ -14,11 +14,13 @@ const fase2 = new Fase2();
 const fase3 = new Fase3();
 // -----------------------
 let fase = 1;
+let clickRatonActivo = false; // fase 1
 // -----------------------
 // -----------------------
 // F U N C I O N  P R I N C I P A L
 // -----------------------
 // -----------------------
+
 function draw() {
     requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -26,18 +28,26 @@ function draw() {
         case 1:
             fase1.dibujarFondo();
             fase1.dibujarBoton();
-            fase1.clickRaton();
+            if (!clickRatonActivo) {
+                fase1.activarClickRaton();
+                clickRatonActivo = true;
+                console.log(fase);
+            }
+            if (fase1.botonJugarPresionado) {
+                fase ++;
+                // clickRatonActivo = false;
+            }
             break;
         case 2:
             fase2.dibujarFondo();
-            fase2.pintarEnemigos();
             fase2.pintarHero();
-            fase2.temporizador();
+            // fase2.pintarEnemigos();
+            // fase2.temporizador();
             break;
         case 3:
-            fase3.dibujarBoton();
-            fase3.dibujarFondo();
-            fase3.clickRaton();
+            // fase3.dibujarBoton();
+            // fase3.dibujarFondo();
+            // fase3.clickRaton();
             break;
     }
 }

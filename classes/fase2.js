@@ -1,7 +1,7 @@
-import Boton from "./classes/boton.js";
+import Boton from "./boton.js";
 const ctx = canvas.getContext('2d');
-import Circulo from "./classes/ellipse.js";
-import Enemy from "./classes/enemies.js";
+import Circulo from "./ellipse.js";
+import Enemy from "./enemies.js";
 
 const boton = new Boton();
 let enemigos = [];
@@ -14,29 +14,28 @@ export default class Fase2 {
     botonJugarPresionado;
     // --------------------------
     constructor() {
-        canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
-        canvas.style.backgroundRepeat = "no-repeat";
-        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
-
-        // Agregado: Manejadores de eventos
-        canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
-        boton.dibujarBotonJugar(ctx, 300, 80, 'PEPE');
-
-
         const intervalId = setInterval(() => {
             tiempo++;
             // dibujarTimer();
         }, 1000);
     }
 
-
-
-    fase2() {
-        requestAnimationFrame(fase2);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    dibujarFondo() {
         canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
         canvas.style.backgroundRepeat = "no-repeat";
-        canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+        canvas.style.backgroundSize = "cover";
+        canvas.style.backgroundPosition = "center center";
+    }
+
+    pintarHero(){
+        let circulo = new Circulo();
+        circulo.dibujar();
+    }
+
+
+    pintarEnemigos() {
+        // requestAnimationFrame(fase2);
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
         circulo.dibujar();
         // -----------------------
         for (const enem of enemigos) {
@@ -48,6 +47,8 @@ export default class Fase2 {
         colission();
         dibujarTimer();
     }
+
+
     dibujarTimer() {
         // const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#FFFFFF';
@@ -57,7 +58,7 @@ export default class Fase2 {
     }
     // ----------------------------------------
     // ---------- E N E M I G O S -------------
-    creoEnemies() {
+    pintarEnemigos() {
         for (let i = 0; i < 10; i++) {
             const velocidadInicialX = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
             const velocidadInicialY = Math.random() * 4 - 2; // Velocidad aleatoria entre -2 y 2
