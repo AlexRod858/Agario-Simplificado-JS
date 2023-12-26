@@ -1,0 +1,65 @@
+body {
+    background-color: rgb(24, 24, 24);
+}
+
+canvas {
+    background-color: rgb(169, 169, 169);
+    /* position: absolute; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#start {
+    background-color: rgb(133, 31, 31);
+    background-image: url('assets/imgs/fondofase3.jpg'); /* Cambia la ruta de la imagen según tu estructura de archivos */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -380px; /* La mitad de la altura del canvas */
+    margin-left: -540px; /* La mitad del ancho del canvas */
+    width: 1080px; /* Ancho del canvas */
+    height: 760px; /* Altura del canvas */
+}
+
+#start h1 {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 88px;
+    text-decoration: none;
+    color: #F0EBCC;
+    border: 2px solid #3EDBF0;
+    transition: background-color 0.3s ease;
+    position: absolute; /* Ajuste la posición absoluta para centrar */
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#start a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3EDBF0;
+    border-radius: 5px;
+    border: 2px solid #3EDBF0;
+    transition: background-color 0.3s ease;
+    position: absolute; /* Ajuste la posición absoluta para centrar */
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#start a:hover {
+    background-color: #2980b9;
+}
+/* ------------------------------- */
+/* ------------------------------- */
+/* ------------------------------- */

@@ -1,40 +1,52 @@
-// export default class Fase1 {
-//     // --------------------------
-//     botonJugarPresionado;
-//     // --------------------------
-//     constructor() {
-//         canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
-//         canvas.style.backgroundRepeat = "no-repeat";
-//         canvas.style.backgroundSize = "cover"; // Opcional: para cubrir todo el fondo sin distorsionar la imagen
+import Boton from "./boton.js";
+const boton = new Boton();
+// --------------------------
+const ctx = canvas.getContext('2d');
+// --------------------------
+export default class Fase1 {
+    // --------------------------
+    botonJugarPresionado = false;
+    // -------------------------
+    constructor() {
+    }
 
-//         // Agregado: Manejadores de eventos
-//         canvas.addEventListener('mousedown', this.manejarMouseDown.bind(this));
-//     }
+    dibujarFondo() {
+        canvas.style.backgroundImage = "url('assets/imgs/fondofase1.jpg')";
+        canvas.style.backgroundRepeat = "no-repeat";
+        canvas.style.backgroundSize = "cover";
+        canvas.style.backgroundPosition = "center center";
+    }
+    // --------------------------
+    // --------------------------
+    dibujarBoton() {
+        boton.dibujarBoton(ctx, 300, 80, 'PEPE');
 
-//     dibujarBotonJugar(ctx) {
-//         // Dibujar el botón "Jugar"
-//         ctx.fillStyle = '#CCCC22';
-//         ctx.fillRect(1080 / 2 - 150, 400, 300, 80);
-//         ctx.fillStyle = '#001122';
-//         ctx.textAlign = 'center';
-//         ctx.font = 'bold 48px arial';
-//         ctx.fillText('JUGAR', 1080 / 2, 460, 200);
-//     }
+    }
+    // --------------------------
+    // --------------------------
+    activarClickRaton() {
+        canvas.addEventListener('mousedown', this.clickRaton.bind(this));
+    }
+    // --------------------------
+    // --------------------------
+    clickRaton(event) {
+        // Agregado: Manejadores de eventos
 
-//     manejarMouseDown(event) {
-//         const x = event.clientX - canvas.getBoundingClientRect().left;
-//         const y = event.clientY - canvas.getBoundingClientRect().top;
+        const x = event.clientX - canvas.getBoundingClientRect().left;
+        const y = event.clientY - canvas.getBoundingClientRect().top;
 
-//         // Verificar si el clic está dentro del área del botón "Jugar"
-//         if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
-//             console.log('Dentro');
-//             let clickDentro = new Audio('../assets/sounds/clickDentro.mp3')
-//             clickDentro.play();
-//             this.botonJugarPresionado = true;
-//         } else {
-//             console.log('Fuera');
-//             let clickFuera = new Audio('../assets/sounds/clickFuera.mp3')
-//             clickFuera.play();
-//         }
-//     }
-// }
+        // Verificar si el clic está dentro del área del botón "Jugar"
+        if (x >= 1080 / 2 - 150 && x <= 1080 / 2 + 150 && y >= 400 && y <= 480) {
+            console.log('Dentro');
+            let clickDentro = new Audio('../assets/sounds/clickDentro.mp3')
+            clickDentro.play();
+            this.botonJugarPresionado = true;
+        } else {
+            console.log('Fuera');
+            let clickFuera = new Audio('../assets/sounds/clickFuera.mp3')
+            clickFuera.play();
+        }
+    }
+    // --------------------------
+    // --------------------------
+}
