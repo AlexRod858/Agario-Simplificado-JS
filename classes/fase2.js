@@ -36,7 +36,6 @@ export default class Fase2 {
     pintarEnemigos() {
         // requestAnimationFrame(fase2);
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
-        circulo.dibujar();
         // -----------------------
         for (const enem of enemigos) {
             enem.dibujar();

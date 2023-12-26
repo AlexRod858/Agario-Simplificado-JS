@@ -7,7 +7,6 @@ export default class Circulo {
             x: 200,
             y: 200
         }
-        // Agregar el event listener para el teclado
         document.addEventListener('keydown', (event) => this.keyHandler(event));
         // document.addEventListener('keyup', (event) => this.keyHandler(event));
         this.radius = 40;

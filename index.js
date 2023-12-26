@@ -35,13 +35,12 @@ function draw() {
             }
             if (fase1.botonJugarPresionado) {
                 fase ++;
-                // clickRatonActivo = false;
             }
             break;
         case 2:
             fase2.dibujarFondo();
             fase2.pintarHero();
-            // fase2.pintarEnemigos();
+            fase2.pintarEnemigos();
             // fase2.temporizador();
             break;
         case 3:
