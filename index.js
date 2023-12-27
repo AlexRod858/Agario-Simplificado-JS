@@ -2,8 +2,10 @@
 const start = document.getElementById('start');
 const gameover = document.getElementById('gameover');
 // -----------------------
-let musicaFondo = new Audio('./assets/sounds/fase1.mp3');
-musicaFondo.play();
+let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
+let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
+let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
+fase1Sound.play();
 let clickSound = new Audio('./assets/sounds/clickDentro.mp3');
 // -----------------------
 // -----------------------
@@ -17,6 +19,8 @@ function startGame() {
     start.style.display = 'none';
     canvas.style.display = 'block';
     gameover.style.display = 'none';
+    fase1Sound.pause();
+    fase2Sound.play();
 }
 function gameOver() {
     clickSound.play();
@@ -25,6 +29,8 @@ function gameOver() {
     gameover.style.display = 'block';
     const h1 = document.querySelector('#gameover h1');
     h1.innerHTML = 'Tiempo: '+tiempoFinal+'s';
+    fase2Sound.pause();
+    fase3Sound.play();
 }
 // ----------------------------------------------
 // ----------------------------------------------
@@ -53,9 +59,7 @@ for (let i = 0; i < 10; i++) {
     enemigos.push(enemigo);
 }
 // -----------------------
-let fase1Sound = new Audio('./assets/sounds/fase1.mp3');
-let fase2Sound = new Audio('./assets/sounds/fase2.mp3');
-let fase3Sound = new Audio('./assets/sounds/fase3.mp3');
+
 // -----------------------
 // -----------------------
 // D R A W
@@ -83,7 +87,6 @@ function draw() {
 // -----------------------
 // -----------------------
 function dibujarTimer() {
-    // const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '24px Arial';
     ctx.textAlign = 'right';
