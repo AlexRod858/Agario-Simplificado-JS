@@ -21,6 +21,8 @@ function startGame() {
     gameover.style.display = 'none';
     fase1Sound.pause();
     fase2Sound.play();
+    draw();
+    tiempo = 0;
 }
 function gameOver() {
     clickSound.play();
@@ -127,4 +129,3 @@ function playColisionSound() {
 }
 // -----------------------
 // -----------------------
-draw();
