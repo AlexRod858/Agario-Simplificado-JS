@@ -3,7 +3,6 @@ const ctx = canvas.getContext('2d');
 import Circulo from "./ellipse.js";
 import Enemy from "./enemies.js";
 
-const boton = new Boton();
 let enemigos = [];
 let tiempo = 0;
 let tiempoFinal;
@@ -11,15 +10,9 @@ let intervaloTiempo;
 
 export default class Fase2 {
     // --------------------------
-    botonJugarPresionado;
-    // --------------------------
     constructor() {
-        const intervalId = setInterval(() => {
-            tiempo++;
-            // dibujarTimer();
-        }, 1000);
-    }
 
+    }
     dibujarFondo() {
         canvas.style.backgroundImage = "url('assets/imgs/fondo.jpg')";
         canvas.style.backgroundRepeat = "no-repeat";
@@ -27,15 +20,15 @@ export default class Fase2 {
         canvas.style.backgroundPosition = "center center";
     }
 
-    pintarHero(){
+    pintarHero() {
         let circulo = new Circulo();
         circulo.dibujar();
     }
 
 
     pintarEnemigos() {
-        // requestAnimationFrame(fase2);
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(pintarEnemigos);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         // -----------------------
         for (const enem of enemigos) {
             enem.dibujar();
