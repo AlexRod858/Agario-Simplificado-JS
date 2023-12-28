@@ -61,8 +61,6 @@ for (let i = 0; i < 10; i++) {
     enemigos.push(enemigo);
 }
 // -----------------------
-
-// -----------------------
 // -----------------------
 // D R A W
 // -----------------------
@@ -108,8 +106,9 @@ function colission() {
         if (distancia < circulo.radius - enem.radius) {
             // Se detectó una colisión, el círculo se "come" al enemigo
             circulo.radius += 5;
-            playColisionSound();
             console.log('COLISIONNNN');
+            let colisionSound = new Audio('./assets/sounds/pop.mp3');
+            colisionSound.play();
             // Eliminar al enemigo
             enemigos.splice(enemigos.indexOf(enem), 1);
             if (enemigos < 1) {
@@ -120,12 +119,6 @@ function colission() {
             }
         }
     }
-}
-// -----------------------
-// -----------------------
-function playColisionSound() {
-    let colisionSound = new Audio('./assets/sounds/pop.mp3');
-    colisionSound.play();
 }
 // -----------------------
 // -----------------------

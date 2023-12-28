@@ -1,4 +1,7 @@
 const ctx = canvas.getContext('2d');
+let circulito = new Image();
+circulito.src = '../assets/imgs/player.png';
+
 export default class Circulo {
     // --------------------------
     // --------------------------
@@ -15,7 +18,9 @@ export default class Circulo {
     // --------------------------
     dibujar() {
         ctx.beginPath();
-        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        // ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        // ctx.drawImage(circulito, this.position.x, this.position.y, this.radius, 0, 2 * Math.PI)
+        ctx.drawImage(circulito, this.position.x - this.radius, this.position.y - this.radius, 2 * this.radius, 2 * this.radius);
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.closePath();

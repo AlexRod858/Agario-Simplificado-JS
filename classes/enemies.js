@@ -1,5 +1,5 @@
-// const image = new Image();
-// image.src = '../assets/imgs/enemy.png';
+let malote = new Image();
+malote.src = '../assets/imgs/enemy.png';
 const ctx = canvas.getContext('2d');
 export default class Enemy {
     // --------------------------
@@ -20,8 +20,7 @@ export default class Enemy {
     // --------------------------
     dibujar() {
         ctx.beginPath();
-        // ctx.drawImage(this.image, this.position.x, this.position.y, this.radius, this.radius);
-        ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        ctx.drawImage(malote, this.position.x - this.radius, this.position.y - this.radius, 2 * this.radius, 2 * this.radius);        // ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.closePath();
